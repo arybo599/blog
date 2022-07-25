@@ -1,0 +1,97 @@
+<!-- Extends from base.html-->
+{% extends 'tut/base.html' %}
+
+<!-- Load static files-->
+{% load static %}
+
+<!-- Load Ratings-->
+{% load ratings %}
+
+<!-- LoadBaseTags-->
+{% load base_tags %}
+
+<!-- Load humanize -->
+{% load humanize %}
+
+<!-- block main-->
+
+{% block main %}
+
+
+<style>
+    h3 {
+        z-index: -1;
+    }
+</style>
+
+
+<section>
+
+
+
+    <center>
+        {% block header %}{% endblock %} 
+        
+        <aside>
+            {% popular_articles %}
+            {% hot_articles %}
+        </aside>
+        
+        
+        {% for article in object_list %}
+        <a href="{% url 'tut:details' article.slug %} " target="_blank ">
+            <hr>
+            <b>{{article.title}}</b>
+            {% if article.is_special %}
+                <span class="class badge badge-danger" style="font-size:14px;">ویژه</span>
+            {% endif %}
+        </a>
+        <hr size="30">
+        <img src="{{article.thumbnail.url}} " alt="{{article.title}} " width="600 " height="400 ">
+        <div>{% ratings article %}</div>
+        <p>{{article.description | striptags| truncatewords:30}}</p>
+        <p style="display:inline;">نوشته شده توسط
+            <a href="{% url 'tut:author' article.author %}">{{article.author.get_full_name}}</a></p>&nbsp;
+        <small>{{article.publish|naturaltime}}</small>
+       
+        <div>
+
+
+            {% for cat in article.category.active %}
+            <a href=" {% url 'tut:category' cat.slug %} ">#{{ cat.title }}</a> {% endfor %}
+        </div>
+
+        <div>بازدیدها:{{ article.hits.count }}</div>
+        {% empty %}
+        <p>متاسفانه محتوایی برای نمایش وجود ندارد.</p> 
+
+    {% endfor %}
+        
+
+
+    </center>
+    {% if is_paginated %}
+
+    <div>
+        {% if page_obj.has_previous %}
+        <a class="btn btn-primary float-left " href="{% block previous_page_url %}{% endblock %} ">  پست های جدید &rarr;</a> {% endif %}
+
+        <!-- -->
+
+        {% if page_obj.has_next %}
+        <a class="btn btn-primary float-left ml-3 " href="{% block next_page_url %}{% endblock %} "> پست های قدیمی &larr;</a> {% endif %}
+
+    </div>
+
+    {% endif %}
+    <br><br><br><br>
+    <footer>
+        <p>این بخش مربوط به پانوشت است.</p>
+    </footer>
+
+
+
+</section>
+
+<!-- End of main block-->
+{% endblock %}

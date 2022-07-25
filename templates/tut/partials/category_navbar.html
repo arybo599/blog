@@ -1,0 +1,26 @@
+<div class="nav">
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'tut:home' %} ">خانه</a>
+            </li>
+            {% for cat in category %} {% if cat.parent == None %}
+            <li>
+                <a href="{% url 'tut:category' cat.slug %}">{{ cat.title }} </a>
+
+                <!-- loop for sub category -->
+
+                {% if cat.children.active %} {% include "tut/partials/category_loop.html" %} {% endif %}
+            </li>
+
+            {% endif %} {% endfor %}
+        </ul>
+        
+    </nav>
+    <form class="form-inline mt-3 " style="right:54em;position:relative;" action="{% url 'tut:search' %}">
+        <input style="height:100%;" type="text" name="q" placeholder="جستجوی متن">
+        <button class="btn btn-success" style="padding:8px;border-radius:5px;margin-right:5px;"> جستجو</button>
+    </form>
+    
+</div>

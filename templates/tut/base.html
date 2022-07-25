@@ -1,0 +1,62 @@
+{% load static %}
+
+<!-- loading user's tags-->
+{% load base_tags %}
+
+<!Doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1">
+    <link rel="stylesheet" href="{% static 'tut/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'tut/css/rtl.css' %}">
+    <link href="{% static 'tut/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    
+
+    <!-- star ratings static files -->
+       
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    
+    
+    
+    
+   
+    <!-- Block for a style address-->
+    {% block custome-header %}{% endblock %}
+    <title>آموزش{% block title %}{% endblock %}</title>
+
+    
+</head>
+
+<body>
+
+
+    <header style="background-image: url('{% static "tut/images/tutorial.jpg " %}')">
+        <a href="{% url 'tut:home' %}">
+            <h3>{% title %}</h3>
+        </a>
+        <h1>عنوان صفحه</h1>
+        <h2>سایت آموزش برنامه نویسی</h2>
+
+
+
+    </header>
+    {% category_navbar %}
+
+    <!--block main-->
+    {% block main %} {% endblock %}
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+
+    <script src="{% static 'tut/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

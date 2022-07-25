@@ -1,0 +1,62 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<html dir="rtl">
+
+<title>ورود به سایت</title>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/login/css/rtl.css'  %} ">
+</head>
+
+<body>
+    {% if form.non_field_errors %}
+    <div class="errors">
+        {% for error in form.non_field_errors %}
+        <span> {{error}}</span>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    <div class="" style="text-align:center;">
+
+        <form method="post">{% csrf_token %}
+
+
+            <label>نام کاربری:</label>
+            {{form.username|add_class:"input1"}}<br><br>
+
+            {% if form.username.errors %}
+            <div class="errors">
+                {% for error in form.username.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+
+            <label>پسورد:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            {{form.password|add_class:"input1"}}<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            {% if form.password.errors %}
+            <div class="errors">
+                {% for error in form.password.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+            
+            <a class="myfont" href="{% url 'password_reset' %}">فراموشی گذر واژه</a>
+            <br>
+            <a class="myfont" href="{% url 'register' %}">ثبت نام کنید.</a>
+            <br>
+            <input type="submit" value=" ورود به حساب کاربری">
+
+        </form>
+    </div>
+</body>
+
+</html>

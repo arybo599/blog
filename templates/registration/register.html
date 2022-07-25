@@ -1,0 +1,89 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<html dir="rtl">
+
+<title>ثبت نام</title>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'registration/login/css/rtl.css'  %} ">
+</head>
+
+<body>
+    {% if form.non_field_errors %}
+    <div class="errors">
+        {% for error in form.non_field_errors %}
+        <span> {{error}}</span>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    <div class="" style="text-align:center;">
+
+        <form method="post">{% csrf_token %}
+            <span class="class myfont">ثبت نام در سایت</span>
+            <br>
+            <label>نام کاربری:</label>
+            {{form.username|add_class:"input1"}}<br><br>
+
+            {% if form.username.errors %}
+            <div class="errors">
+                {% for error in form.username.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+
+
+
+            <label>ایمیل:</label>
+            {{form.email|add_class:"input1"}}<br><br>
+
+            {% if form.email.errors %}
+            <div class="errors">
+                {% for error in form.email.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+
+            <label>پسورد:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            {{form.password1|add_class:"input1"}}<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            {% if form.password1.errors %}
+            <div class="errors">
+                {% for error in form.password1.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+
+            <label>تایید گذرواژه:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            {{form.password2|add_class:"input1"}}<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            {% if form.password2.errors %}
+            <div class="errors">
+                {% for error in form.password2.errors %}
+                <span> {{error}}</span>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+            حسابی دارید؟
+            <a class="myfont" href="{% url 'login' %}">وارد شوید.</a>
+            <br>
+            <input type="submit" value=" ثبت نام">
+
+        </form>
+    </div>
+</body>
+
+</html>

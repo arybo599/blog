@@ -1,0 +1,84 @@
+<!-- Extends from base.html-->
+{% extends 'tut/base.html' %}
+<!-- Comments -->
+{% load comment_tags %} 
+<!-- Load static files-->
+{% load static %}
+
+<!-- Block for a style address-->
+{% block custome-header %}{% endblock %}
+
+<!-- Title for details's page-->
+{% block title %} | {{object.title}} {% endblock %}
+
+<!-- Load Ratings-->
+{% load ratings %}
+
+<!-- LoadBaseTags-->
+{% load base_tags %}
+
+<!-- Load humanize -->
+{% load humanize %}
+
+
+<!-- block main-->
+{% block main %}
+
+<section>
+
+
+
+    <center>
+        <aside>
+            {% popular_articles %}
+            {% hot_articles %}
+        </aside>
+        
+        <h3 style="display:inline;">{{object.title}}</h3>
+        {% if article.is_special %}
+        <span class="class badge badge-danger" style="font-size:14px;">ویژه</span>
+        {% endif %}
+        <br>
+        <img src="{{object.thumbnail.url}} " alt="{{object.title}} " width="600 " height="400 ">
+
+        <div class="text-justify text-center">
+            {% if object.is_special %}
+            {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+
+            <p>{{object.description | linebreaks|safe}}</p>
+
+            {% else %}
+            <p>{{article.description | striptags| truncatewords:30}}</p>
+
+            <p class="alert alert-warning ">این مقاله ویژه است و برای دسترسی به آن باید <a href="#"
+                    class="alert-link">اشتراک ویژه</a> داشته باشید.</p>
+
+            {% endif %}
+
+            {% else %}
+
+            <p>{{object.description | linebreaks|safe}}</p>
+
+            {% endif %}
+            <div> {% ratings object %}</div>
+            <div>بازدیدها:{{ object.hits.count }}</div>
+
+            {% render_comments object request %}
+            {% include_bootstrap %}
+
+        </div>
+        <time style="float:left">نوشته شده توسط <a href="#"> ادمین</a> در تاریخ: {{object.publish|naturaltime}}</time>
+        
+        <br><br>
+
+    </center>
+    <hr>
+    <footer>
+        <p>این بخش مربوط به پانوشت است.</p>
+    </footer>
+
+
+</section>
+
+<!-- End of main block-->
+{% endblock %}

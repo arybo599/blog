@@ -1,0 +1,17 @@
+<!-- Extends from list.html-->
+{% extends 'tut/list.html' %}
+
+<!-- block header-->
+{% block header %}
+<h3 class="alert alert-primary text-center">جستجو: {{search}}</h3>
+{% endblock %}
+
+
+<!--previous_page block -->
+{% block previous_page_url %} {% url 'tut:search'  page_obj.previous_page_number %}?q={{search}} 
+{% endblock %}
+
+<!-- next_page block -->
+
+{% block next_page_url %} {% url 'tut:search'  page_obj.next_page_number %}?q={{search}}
+{% endblock %}

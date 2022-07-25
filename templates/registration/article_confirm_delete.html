@@ -1,0 +1,15 @@
+{% extends 'registration/base.html' %}
+
+
+
+
+
+{% block title %} {% block title-meta %}حذف مقالات{% endblock %} {% endblock %}
+
+{% block main %}
+<form method="post">{% csrf_token %}
+    <p> آیا مطمئن هستید که می خواهید مقاله "{{object}}" از "{{object.author.get_full_name}}" حذف شود؟</p>
+    <input type="submit" value="تایید" class="btn btn-danger">
+
+</form>
+{% endblock %}

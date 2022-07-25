@@ -1,0 +1,15 @@
+<!-- Extends from list.html-->
+{% extends 'tut/list.html' %}
+
+<!-- block header-->
+{% block header %}
+<h3 class="alert alert-primary text-center">نویسنده: {{author.get_full_name}}</h3>
+{% endblock %}
+
+
+<!--previous_page block -->
+{% block previous_page_url %} {% url 'tut:author' author.username page_obj.previous_page_number %} {% endblock %}
+
+<!-- next_page block -->
+
+{% block next_page_url %} {% url 'tut:author' author.username page_obj.next_page_number %} {% endblock %}
